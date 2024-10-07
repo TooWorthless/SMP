@@ -92,6 +92,49 @@ function validateLesson(lesson: Lesson): ScheduleConflict | null {
     return null;
 }
 
+
+// Functions that were in the task,
+// but were not used in the example
+// of the system usage on the HTMl page in
+// GitHub Pages
+function getClassroomUtilization(classroomNumber: string): number {
+    const totalLessons = schedule.length;
+    const classroomLessons = schedule.filter(lesson => lesson.classroomNumber === classroomNumber).length;
+
+    return (classroomLessons / totalLessons) * 100;
+}
+function getMostPopularCourseType(): CourseType {
+    const courseTypesCount: Record<CourseType, number> = {
+        "Lecture": 0,
+        "Seminar": 0,
+        "Lab": 0,
+        "Practice": 0
+    };
+
+    schedule.forEach(lesson => {
+        const course = courses.find(c => c.id === lesson.courseId);
+        if (course) {
+            courseTypesCount[course.type]++;
+        }
+    });
+
+    return Object.keys(courseTypesCount).reduce((a, b) => courseTypesCount[a as CourseType] > courseTypesCount[b as CourseType] ? a : b) as CourseType;
+}
+function reassignClassroom(lessonId: number, newClassroomNumber: string): boolean {
+    const lessonIndex = schedule.findIndex(lesson => lesson.courseId === lessonId);
+    if (lessonIndex !== -1 && !validateLesson({ ...schedule[lessonIndex], classroomNumber: newClassroomNumber })) {
+        schedule[lessonIndex].classroomNumber = newClassroomNumber;
+        return true;
+    }
+    return false;
+}
+function cancelLesson(lessonId: number): void {
+    schedule = schedule.filter(lesson => lesson.courseId !== lessonId);
+}
+
+
+
+
 // DOM Manipulation and Form Handlers
 
 document.getElementById('addProfessorForm')!.addEventListener('submit', function(e) {

@@ -45,6 +45,41 @@ function validateLesson(lesson) {
     }
     return null;
 }
+// Functions that were in the task,
+// but were not used in the example
+// of the system usage on the HTMl page in
+// GitHub Pages
+function getClassroomUtilization(classroomNumber) {
+    const totalLessons = schedule.length;
+    const classroomLessons = schedule.filter(lesson => lesson.classroomNumber === classroomNumber).length;
+    return (classroomLessons / totalLessons) * 100;
+}
+function getMostPopularCourseType() {
+    const courseTypesCount = {
+        "Lecture": 0,
+        "Seminar": 0,
+        "Lab": 0,
+        "Practice": 0
+    };
+    schedule.forEach(lesson => {
+        const course = courses.find(c => c.id === lesson.courseId);
+        if (course) {
+            courseTypesCount[course.type]++;
+        }
+    });
+    return Object.keys(courseTypesCount).reduce((a, b) => courseTypesCount[a] > courseTypesCount[b] ? a : b);
+}
+function reassignClassroom(lessonId, newClassroomNumber) {
+    const lessonIndex = schedule.findIndex(lesson => lesson.courseId === lessonId);
+    if (lessonIndex !== -1 && !validateLesson(Object.assign(Object.assign({}, schedule[lessonIndex]), { classroomNumber: newClassroomNumber }))) {
+        schedule[lessonIndex].classroomNumber = newClassroomNumber;
+        return true;
+    }
+    return false;
+}
+function cancelLesson(lessonId) {
+    schedule = schedule.filter(lesson => lesson.courseId !== lessonId);
+}
 // DOM Manipulation and Form Handlers
 document.getElementById('addProfessorForm').addEventListener('submit', function (e) {
     e.preventDefault();
