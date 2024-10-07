@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Schedule Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>University Schedule Management</h1>
+        
+        <!-- Add Professor Form -->
+        <section>
+            <h2>Add Professor</h2>
+            <form id="addProfessorForm">
+                <input type="text" id="professorName" placeholder="Professor Name" required />
+                <input type="text" id="professorDepartment" placeholder="Department" required />
+                <button type="submit">Add Professor</button>
+            </form>
+        </section>
+
+        <!-- Add Lesson Form -->
+        <section>
+            <h2>Add Lesson</h2>
+            <form id="addLessonForm">
+                <select id="selectCourse">
+                    <option value="" disabled selected>Select Course</option>
+                    <option value="1">Math 101</option>
+                    <option value="2">Physics 202</option>
+                </select>
+                <select id="selectProfessor">
+                    <option value="" disabled selected>Select Professor</option>
+                    <!-- Professors will be loaded here -->
+                </select>
+                <select id="selectDay">
+                    <option value="" disabled selected>Select Day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+                <select id="selectTimeSlot">
+                    <option value="" disabled selected>Select Time Slot</option>
+                    <option value="8:30-10:00">8:30-10:00</option>
+                    <option value="10:15-11:45">10:15-11:45</option>
+                    <option value="12:15-13:45">12:15-13:45</option>
+                    <option value="14:00-15:30">14:00-15:30</option>
+                    <option value="15:45-17:15">15:45-17:15</option>
+                </select>
+                <input type="text" id="classroomNumber" placeholder="Classroom Number" required />
+                <button type="submit">Add Lesson</button>
+            </form>
+        </section>
+
+        <!-- Find Available Classrooms -->
+        <section>
+            <h2>Find Available Classrooms</h2>
+            <form id="findClassroomsForm">
+                <select id="searchDayOfWeek">
+                    <option value="" disabled selected>Select Day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+                <select id="searchTimeSlot">
+                    <option value="" disabled selected>Select Time Slot</option>
+                    <option value="8:30-10:00">8:30-10:00</option>
+                    <option value="10:15-11:45">10:15-11:45</option>
+                    <option value="12:15-13:45">12:15-13:45</option>
+                    <option value="14:00-15:30">14:00-15:30</option>
+                    <option value="15:45-17:15">15:45-17:15</option>
+                </select>
+                <button type="submit">Find Classrooms</button>
+            </form>
+            <ul id="availableClassroomsList"></ul>
+        </section>
+
+        <!-- Get Professor Schedule -->
+        <section>
+            <h2>Get Professor Schedule</h2>
+            <form id="getProfessorScheduleForm">
+                <select id="selectProfessorSchedule">
+                    <option value="" disabled selected>Select Professor</option>
+                    <!-- Professors will be loaded here -->
+                </select>
+                <button type="submit">Get Schedule</button>
+            </form>
+            <ul id="professorScheduleList"></ul>
+        </section>
+
+    </div>
+
+    <script src="../dist/app.js"></script>
+</body>
+</html>
